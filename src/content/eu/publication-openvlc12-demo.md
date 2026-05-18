@@ -7,4 +7,4 @@ order: 10
 url: https://doi.org/10.1145/3129881.3129895
 ---
 
-Ander Galisteo, Hongjia Wu, Qing Wang, Diego Juara, Marco Zuniga y Domenico Giustiniano.
+Ander Galisteo, Hongjia Wu, Qing Wang, Diego Juara, Marco Zuniga eta Domenico Giustiniano.

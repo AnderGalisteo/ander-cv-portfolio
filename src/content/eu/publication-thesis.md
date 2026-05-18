@@ -7,4 +7,4 @@ order: 120
 url: /publications/Ander-Galisteo-PhD-Thesis.pdf
 ---
 
-Tesis doctoral de Ander Galisteo Zabalo, dirigida por Domenico Giustiniano, centrada en redes de comunicación por luz visible para IoT y sus aplicaciones.
+Tesis doctoral de Ander Galisteo Zabalo, dirigida por Domenico Giustiniano, centrada en redes de comunicación por luz visible para IoT eta sus aplicaciones.

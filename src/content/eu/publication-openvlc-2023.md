@@ -7,4 +7,4 @@ order: 110
 url: https://doi.org/10.1109/MCOM.001.2200642
 ---
 
-Borja Genovés Guzmán, Muhammad Sarmad Mir, Dayrene Frómeta, Ander Galisteo, Qing Wang y Domenico Giustiniano.
+Borja Genovés Guzmán, Muhammad Sarmad Mir, Dayrene Frómeta, Ander Galisteo, Qing Wang eta Domenico Giustiniano.

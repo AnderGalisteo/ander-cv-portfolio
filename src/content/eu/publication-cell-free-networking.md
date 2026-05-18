@@ -7,4 +7,4 @@ order: 70
 url: https://doi.org/10.1109/TNET.2020.2966322
 ---
 
-Jona Beysens, Qing Wang, Ander Galisteo, Domenico Giustiniano y Sofie Pollin.
+Jona Beysens, Qing Wang, Ander Galisteo, Domenico Giustiniano eta Sofie Pollin.

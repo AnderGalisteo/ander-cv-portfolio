@@ -7,4 +7,4 @@ order: 40
 url: https://doi.org/10.1145/3281411.3281425
 ---
 
-Jona Beysens, Ander Galisteo, Qing Wang, Diego Juara, Domenico Giustiniano y Sofie Pollin.
+Jona Beysens, Ander Galisteo, Qing Wang, Diego Juara, Domenico Giustiniano eta Sofie Pollin.

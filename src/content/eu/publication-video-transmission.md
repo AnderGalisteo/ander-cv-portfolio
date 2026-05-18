@@ -7,4 +7,4 @@ order: 60
 url: https://dspace.networks.imdea.org/handle/20.500.12761/711
 ---
 
-Ander Galisteo, Diego Juara, Héctor Cordobés y Domenico Giustiniano.
+Ander Galisteo, Diego Juara, Héctor Cordobés eta Domenico Giustiniano.

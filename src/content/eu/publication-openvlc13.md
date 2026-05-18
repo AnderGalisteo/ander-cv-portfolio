@@ -7,4 +7,4 @@ order: 50
 url: https://doi.org/10.1109/WF-IoT.2019.8767252
 ---
 
-Ander Galisteo, Diego Juara y Domenico Giustiniano.
+Ander Galisteo, Diego Juara eta Domenico Giustiniano.

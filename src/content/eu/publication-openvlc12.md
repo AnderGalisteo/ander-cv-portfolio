@@ -7,4 +7,4 @@ order: 30
 url: https://doi.org/10.23919/WONS.2018.8311663
 ---
 
-Ander Galisteo, Diego Juara, Qing Wang y Domenico Giustiniano.
+Ander Galisteo, Diego Juara, Qing Wang eta Domenico Giustiniano.

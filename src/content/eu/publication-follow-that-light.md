@@ -7,4 +7,4 @@ order: 20
 url: https://doi.org/10.1145/3143361.3143371
 ---
 
-Ander Galisteo, Qing Wang, Aniruddha Deshpande, Marco Zuniga y Domenico Giustiniano.
+Ander Galisteo, Qing Wang, Aniruddha Deshpande, Marco Zuniga eta Domenico Giustiniano.

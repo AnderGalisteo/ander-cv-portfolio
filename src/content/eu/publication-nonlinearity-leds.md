@@ -7,4 +7,4 @@ order: 100
 url: https://dspace.networks.imdea.org/handle/20.500.12761/844
 ---
 
-Muhammad Sarmad Mir, Borja Genovés Guzmán, Ander Galisteo y Domenico Giustiniano.
+Muhammad Sarmad Mir, Borja Genovés Guzmán, Ander Galisteo eta Domenico Giustiniano.
