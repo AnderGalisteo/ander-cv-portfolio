@@ -37,7 +37,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          BASE_PATH: /ander-cv-portfolio
           SITE_URL: https://${{ github.repository_owner }}.github.io
 
       - name: Upload artifact

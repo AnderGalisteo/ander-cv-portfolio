@@ -18,7 +18,7 @@ This repository is the source of truth for Ander Galisteo's CV and portfolio web
 
 ## Deployment
 
-The `Deploy website` workflow validates content, builds Astro, uploads `dist`, and deploys with GitHub Pages. For a project site, the workflow sets `BASE_PATH=/ander-cv-portfolio` so static assets resolve correctly.
+The `Deploy website` workflow validates content, builds Astro, uploads `dist`, and deploys with GitHub Pages as the account user site at `https://andergalisteo.github.io/`.
 
 ## Updating Content
 
