@@ -180,7 +180,7 @@ const copy = locale === "en"
               <h3>{item.data.title}</h3>
               <p>{item.data.year}</p>
               <div class="rich"><Content /></div>
-              {item.data.url && <a href={item.data.url}>DOI</a>}
+              {item.data.url && <a href={withBase(item.data.url)}>{locale === "en" ? "Open" : "Abrir"}</a>}
             </article>
           );
         })}

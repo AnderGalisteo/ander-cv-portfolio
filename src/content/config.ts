@@ -34,7 +34,7 @@ const datedItem = z.object({
   title: z.string(),
   organization: z.string().optional(),
   year: z.number().optional(),
-  url: z.string().url().optional(),
+  url: z.string().optional(),
   order: z.number()
 });
 
