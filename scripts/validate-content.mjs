@@ -39,7 +39,7 @@ const schema = z.discriminatedUnion("kind", [
     note: z.string().optional()
   }),
   z.object({
-    kind: z.enum(["project", "talk", "publication"]),
+    kind: z.enum(["project", "talk", "appearance", "award", "publication"]),
     title: z.string().min(1),
     organization: z.string().optional(),
     year: z.number().optional(),

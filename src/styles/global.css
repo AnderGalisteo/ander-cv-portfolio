@@ -348,6 +348,14 @@ h3 {
   min-height: 260px;
 }
 
+.compact-card {
+  min-height: 210px;
+}
+
+.awards {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .card a,
 .list-item a {
   color: var(--accent-dark);
@@ -432,6 +440,7 @@ footer p {
 
   .timeline-item,
   .cards,
+  .awards,
   .split,
   .two-columns {
     grid-template-columns: 1fr;

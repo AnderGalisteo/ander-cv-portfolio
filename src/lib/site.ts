@@ -35,6 +35,8 @@ export async function getSiteContent(locale: Locale) {
     skills: byOrderAsc(byKindName("skills")),
     projects: byOrderDesc(byKindName("project")),
     talks: byOrderDesc(byKindName("talk")),
+    appearances: byOrderDesc(byKindName("appearance")),
+    awards: byOrderDesc(byKindName("award")),
     publications: byOrderDesc(byKindName("publication"))
   };
 

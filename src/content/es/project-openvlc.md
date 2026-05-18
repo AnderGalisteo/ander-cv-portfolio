@@ -4,7 +4,7 @@ title: OpenVLC y comunicación por luz visible para IoT
 organization: IMDEA Networks
 year: 2023
 order: 30
-url: https://doi.org/10.1109/MCOM.001.2200642
+url: https://www.youtube.com/watch?v=fZjTZ-eu6rc
 ---
 
-Trabajo de investigación y prototipado en comunicación por luz visible para sistemas embebidos e IoT, incluyendo contribuciones conectadas con OpenVLC y publicaciones en IEEE Communications Magazine.
+Trabajo de investigación, prototipado, hardware, firmware y software alrededor de OpenVLC, una plataforma abierta para hacer más accesible el desarrollo, la docencia y la experimentación con comunicación por luz visible.

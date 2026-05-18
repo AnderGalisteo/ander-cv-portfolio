@@ -1,9 +1,9 @@
 ---
-kind: talk
+kind: appearance
 title: Ciberseguridad industrial y sistemas embebidos
 organization: RootedCON
 year: 2026
-order: 10
+order: 120
 url: https://reg.rootedcon.com/cfp/speaker/781
 ---
 

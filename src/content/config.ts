@@ -50,6 +50,8 @@ const contentSchema = z.discriminatedUnion("kind", [
   education.extend({ kind: z.literal("education") }),
   datedItem.extend({ kind: z.literal("project") }),
   datedItem.extend({ kind: z.literal("talk") }),
+  datedItem.extend({ kind: z.literal("appearance") }),
+  datedItem.extend({ kind: z.literal("award") }),
   datedItem.extend({ kind: z.literal("publication") }),
   skillGroup.extend({ kind: z.literal("skills") })
 ]);
