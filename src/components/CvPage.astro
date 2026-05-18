@@ -63,7 +63,13 @@ const headings = {
     awards: "Academic recognition and research support",
     appearances: "Science communication and media",
     publications: "Research",
-    open: "Open"
+    open: "Open",
+    stats: [
+      { value: "70%", label: "risk exposure reduction" },
+      { value: "50+", label: "client projects" },
+      { value: "10+", label: "peer-reviewed papers" },
+      { value: "11", label: "concurrent projects led" }
+    ]
   },
   es: {
     experience: "Liderazgo en sistemas críticos para la seguridad",
@@ -73,7 +79,13 @@ const headings = {
     awards: "Reconocimiento académico y apoyo a la investigación",
     appearances: "Divulgación científica y medios",
     publications: "Investigación",
-    open: "Abrir"
+    open: "Abrir",
+    stats: [
+      { value: "70%", label: "reducción de exposición" },
+      { value: "50+", label: "proyectos de cliente" },
+      { value: "10+", label: "artículos científicos" },
+      { value: "11", label: "proyectos simultáneos" }
+    ]
   },
   eu: {
     experience: "Segurtasunerako sistema kritikoetan lidergoa",
@@ -83,7 +95,13 @@ const headings = {
     awards: "Aitorpen akademikoa eta ikerketarako laguntza",
     appearances: "Zientzia-dibulgazioa eta komunikabideak",
     publications: "Ikerketa",
-    open: "Ireki"
+    open: "Ireki",
+    stats: [
+      { value: "70%", label: "esposizioaren murrizketa" },
+      { value: "50+", label: "bezero-proiektu" },
+      { value: "10+", label: "artikulu zientifiko" },
+      { value: "11", label: "aldi bereko proiektu" }
+    ]
   }
 }[locale];
 ---
@@ -107,6 +125,14 @@ const headings = {
           <a class="button" href={withBase(profile.cv)}>{copy.download}</a>
           <a class="button ghost" href={profile.linkedin}>LinkedIn</a>
         </div>
+        <div class="metric-grid" aria-label="Career metrics">
+          {headings.stats.map((stat) => (
+            <div class="metric">
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
       <aside class="hero-panel" aria-label={copy.impact}>
         <h2>{copy.impact}</h2>
@@ -121,8 +147,8 @@ const headings = {
       <span>{copy.source}</span>
     </section>
 
-    <section class="section" id="experience">
-      <div class="section-heading">
+    <section class="section section-plain" id="experience">
+      <div class="section-heading framed">
         <p class="eyebrow">{copy.experience}</p>
         <h2>{headings.experience}</h2>
       </div>
@@ -149,8 +175,8 @@ const headings = {
       </div>
     </section>
 
-    <section class="section grid-section" id="work">
-      <div class="section-heading">
+    <section class="section grid-section accent-section" id="work">
+      <div class="section-heading framed">
         <p class="eyebrow">{copy.work}</p>
         <h2>{headings.work}</h2>
       </div>
@@ -169,9 +195,9 @@ const headings = {
       </div>
     </section>
 
-    <section class="section split">
+    <section class="section split section-plain">
       <div>
-        <div class="section-heading compact">
+        <div class="section-heading compact framed">
           <p class="eyebrow">{copy.skills}</p>
           <h2>{headings.skills}</h2>
         </div>
@@ -185,7 +211,7 @@ const headings = {
         </div>
       </div>
       <div>
-        <div class="section-heading compact">
+        <div class="section-heading compact framed">
           <p class="eyebrow">{copy.education}</p>
           <h2>{headings.education}</h2>
         </div>
@@ -202,16 +228,16 @@ const headings = {
       </div>
     </section>
 
-    <section class="section grid-section">
-      <div class="section-heading">
+    <section class="section grid-section recognition-section">
+      <div class="section-heading framed">
         <p class="eyebrow">{copy.awards}</p>
         <h2>{headings.awards}</h2>
       </div>
-      <div class="cards awards">
+      <div class="awards-timeline">
         {content.awards.map(async (item) => {
           const { Content } = await item.render();
           return (
-            <article class="card compact-card">
+            <article class="award-item">
               <p class="dates">{item.data.year}</p>
               <h3>{item.data.title}</h3>
               {item.data.organization && <p class="meta">{item.data.organization}</p>}
@@ -222,16 +248,16 @@ const headings = {
       </div>
     </section>
 
-    <section class="section two-columns">
+    <section class="section two-columns dense-section">
       <div>
-        <div class="section-heading compact">
+        <div class="section-heading compact framed">
           <p class="eyebrow">{copy.appearances}</p>
           <h2>{headings.appearances}</h2>
         </div>
         {content.appearances.map(async (item) => {
           const { Content } = await item.render();
           return (
-            <article class="list-item">
+            <article class="list-item dense-item">
               <h3>{item.data.title}</h3>
               <p>{item.data.organization} · {item.data.year}</p>
               <div class="rich"><Content /></div>
@@ -241,14 +267,14 @@ const headings = {
         })}
       </div>
       <div>
-        <div class="section-heading compact">
+        <div class="section-heading compact framed">
           <p class="eyebrow">{copy.publications}</p>
           <h2>{headings.publications}</h2>
         </div>
         {content.publications.map(async (item) => {
           const { Content } = await item.render();
           return (
-            <article class="list-item">
+            <article class="list-item dense-item publication-item">
               <h3>{item.data.title}</h3>
               <p>{item.data.year}</p>
               <div class="rich"><Content /></div>
