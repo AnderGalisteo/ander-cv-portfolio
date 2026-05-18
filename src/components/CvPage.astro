@@ -1,0 +1,194 @@
+---
+import { getSiteContent, withBase, type Locale } from "@/lib/site";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = await getSiteContent(locale);
+const profile = content.profile.data;
+const copy = locale === "en"
+  ? {
+      availability: "Industrial cybersecurity, OT/IoT security, embedded systems, and engineering leadership.",
+      download: "Download CV",
+      contact: "Contact",
+      impact: "Selected impact",
+      experience: "Experience",
+      education: "Education",
+      skills: "Skills",
+      work: "Portfolio",
+      talks: "Talks",
+      publications: "Publications",
+      source: "Content is maintained through Markdown files in GitHub."
+    }
+  : {
+      availability: "Ciberseguridad industrial, seguridad OT/IoT, sistemas embebidos y liderazgo de ingeniería.",
+      download: "Descargar CV",
+      contact: "Contacto",
+      impact: "Impacto destacado",
+      experience: "Experiencia",
+      education: "Educación",
+      skills: "Competencias",
+      work: "Portfolio",
+      talks: "Charlas",
+      publications: "Publicaciones",
+      source: "El contenido se mantiene mediante archivos Markdown en GitHub."
+    };
+---
+
+<BaseLayout title={`${profile.title} | CV & Portfolio`} description={profile.summary} locale={locale}>
+  <main>
+    <section class="hero">
+      <img
+        class="hero-image"
+        src={withBase("/images/industrial-cybersecurity-hero.png")}
+        alt=""
+        aria-hidden="true"
+      />
+      <div class="hero-copy">
+        <p class="eyebrow">{profile.location}</p>
+        <h1>{profile.title}</h1>
+        <p class="role">{profile.role}</p>
+        <p class="summary">{profile.summary}</p>
+        <div class="actions" id="contact">
+          <a class="button primary" href={`mailto:${profile.email}`}>{copy.contact}</a>
+          <a class="button" href={withBase(profile.cv)}>{copy.download}</a>
+          <a class="button ghost" href={profile.linkedin}>LinkedIn</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label={copy.impact}>
+        <h2>{copy.impact}</h2>
+        <ul>
+          {profile.highlights.map((item: string) => <li>{item}</li>)}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="band intro">
+      <p>{copy.availability}</p>
+      <span>{copy.source}</span>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-heading">
+        <p class="eyebrow">{copy.experience}</p>
+        <h2>{locale === "en" ? "Leadership across security-critical systems" : "Liderazgo en sistemas críticos para la seguridad"}</h2>
+      </div>
+      <div class="timeline">
+        {content.experience.map(async (item) => {
+          const { Content } = await item.render();
+          return (
+            <article class="timeline-item">
+              <div>
+                <p class="dates">{item.data.start} - {item.data.end}</p>
+                <h3>{item.data.title}</h3>
+                <p class="meta">{item.data.company} · {item.data.location}</p>
+              </div>
+              <div class="rich">
+                <Content />
+                <div class="tags">
+                  {item.data.technologies.map((tech: string) => <span>{tech}</span>)}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="section grid-section" id="work">
+      <div class="section-heading">
+        <p class="eyebrow">{copy.work}</p>
+        <h2>{locale === "en" ? "Projects and public work" : "Proyectos y trabajo público"}</h2>
+      </div>
+      <div class="cards">
+        {content.projects.map(async (item) => {
+          const { Content } = await item.render();
+          return (
+            <article class="card">
+              <p class="dates">{item.data.year}</p>
+              <h3>{item.data.title}</h3>
+              <div class="rich"><Content /></div>
+              {item.data.url && <a href={item.data.url}>{locale === "en" ? "View source" : "Ver fuente"}</a>}
+            </article>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <div class="section-heading compact">
+          <p class="eyebrow">{copy.skills}</p>
+          <h2>{locale === "en" ? "Operating range" : "Áreas de trabajo"}</h2>
+        </div>
+        <div class="skill-list">
+          {content.skills.map((group) => (
+            <article>
+              <h3>{group.data.title}</h3>
+              <p>{group.data.skills.join(" · ")}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div class="section-heading compact">
+          <p class="eyebrow">{copy.education}</p>
+          <h2>{locale === "en" ? "Academic foundation" : "Base académica"}</h2>
+        </div>
+        <div class="education-list">
+          {content.education.map((item) => (
+            <article>
+              <p class="dates">{item.data.period}</p>
+              <h3>{item.data.degree}</h3>
+              <p>{item.data.institution} · {item.data.location}</p>
+              {item.data.note && <span>{item.data.note}</span>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section two-columns">
+      <div>
+        <div class="section-heading compact">
+          <p class="eyebrow">{copy.talks}</p>
+          <h2>{locale === "en" ? "Speaking" : "Ponencias"}</h2>
+        </div>
+        {content.talks.map(async (item) => {
+          const { Content } = await item.render();
+          return (
+            <article class="list-item">
+              <h3>{item.data.title}</h3>
+              <p>{item.data.organization} · {item.data.year}</p>
+              <div class="rich"><Content /></div>
+            </article>
+          );
+        })}
+      </div>
+      <div>
+        <div class="section-heading compact">
+          <p class="eyebrow">{copy.publications}</p>
+          <h2>{locale === "en" ? "Research" : "Investigación"}</h2>
+        </div>
+        {content.publications.map(async (item) => {
+          const { Content } = await item.render();
+          return (
+            <article class="list-item">
+              <h3>{item.data.title}</h3>
+              <p>{item.data.year}</p>
+              <div class="rich"><Content /></div>
+              {item.data.url && <a href={item.data.url}>DOI</a>}
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>© {new Date().getFullYear()} Ander Galisteo</p>
+    <a href={`mailto:${profile.email}`}>{profile.email}</a>
+  </footer>
+</BaseLayout>

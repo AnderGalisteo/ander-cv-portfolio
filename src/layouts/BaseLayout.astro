@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import { withBase, locales, otherLocale, type Locale } from "@/lib/site";
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+}
+
+const { title, description, locale } = Astro.props;
+const nextLocale = otherLocale(locale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={withBase(locales[locale].path)} aria-label="Ander Galisteo">
+        <span class="brand-mark">AG</span>
+        <span>Ander Galisteo</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#experience">{locale === "en" ? "Experience" : "Experiencia"}</a>
+        <a href="#work">{locale === "en" ? "Work" : "Trabajo"}</a>
+        <a href="#contact">{locale === "en" ? "Contact" : "Contacto"}</a>
+        <a class="language" href={withBase(locales[nextLocale].path)}>{locales[locale].switchLabel}</a>
+      </nav>
+    </header>
+    <slot />
+  </body>
+</html>

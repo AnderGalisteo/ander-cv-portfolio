@@ -1,0 +1,16 @@
+---
+import { withBase } from "@/lib/site";
+const target = withBase("/en/");
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Ander Galisteo</title>
+  </head>
+  <body>
+    <a href={target}>Ander Galisteo</a>
+  </body>
+</html>
