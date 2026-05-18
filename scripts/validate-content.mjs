@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const root = process.cwd();
 const contentRoot = path.join(root, "src", "content");
-const locales = ["en", "es"];
+const locales = ["en", "es", "eu"];
 
 const schema = z.discriminatedUnion("kind", [
   z.object({

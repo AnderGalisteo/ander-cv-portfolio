@@ -63,5 +63,6 @@ const localized = defineCollection({
 
 export const collections = {
   en: localized,
-  es: localized
+  es: localized,
+  eu: localized
 };

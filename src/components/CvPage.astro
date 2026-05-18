@@ -9,8 +9,8 @@ interface Props {
 const { locale } = Astro.props;
 const content = await getSiteContent(locale);
 const profile = content.profile.data;
-const copy = locale === "en"
-  ? {
+const copy = {
+  en: {
       availability: "Industrial cybersecurity, OT/IoT security, embedded systems, and engineering leadership.",
       download: "Download CV",
       contact: "Contact",
@@ -23,8 +23,8 @@ const copy = locale === "en"
       awards: "Awards & Scholarships",
       publications: "Publications",
       source: "Content is maintained through Markdown files in GitHub."
-    }
-  : {
+    },
+  es: {
       availability: "Ciberseguridad industrial, seguridad OT/IoT, sistemas embebidos y liderazgo de ingeniería.",
       download: "Descargar CV",
       contact: "Contacto",
@@ -37,7 +37,55 @@ const copy = locale === "en"
       awards: "Premios y becas",
       publications: "Publicaciones",
       source: "El contenido se mantiene mediante archivos Markdown en GitHub."
-    };
+    },
+  eu: {
+      availability: "Zibersegurtasun industriala, OT/IoT segurtasuna, sistema txertatuak eta ingeniaritza-lidergoa.",
+      download: "CVa deskargatu",
+      contact: "Kontaktua",
+      impact: "Eragin nabarmena",
+      experience: "Esperientzia",
+      education: "Ikasketak",
+      skills: "Gaitasunak",
+      work: "Portfolioa",
+      appearances: "Agerpen publikoak",
+      awards: "Sariak eta bekak",
+      publications: "Argitalpenak",
+      source: "Edukia GitHubeko Markdown fitxategien bidez mantentzen da."
+    }
+}[locale];
+
+const headings = {
+  en: {
+    experience: "Leadership across security-critical systems",
+    work: "Projects and public work",
+    skills: "Operating range",
+    education: "Academic foundation",
+    awards: "Academic recognition and research support",
+    appearances: "Science communication and media",
+    publications: "Research",
+    open: "Open"
+  },
+  es: {
+    experience: "Liderazgo en sistemas críticos para la seguridad",
+    work: "Proyectos y trabajo público",
+    skills: "Áreas de trabajo",
+    education: "Base académica",
+    awards: "Reconocimiento académico y apoyo a la investigación",
+    appearances: "Divulgación científica y medios",
+    publications: "Investigación",
+    open: "Abrir"
+  },
+  eu: {
+    experience: "Segurtasunerako sistema kritikoetan lidergoa",
+    work: "Proiektuak eta lan publikoa",
+    skills: "Lan-eremuak",
+    education: "Oinarri akademikoa",
+    awards: "Aitorpen akademikoa eta ikerketarako laguntza",
+    appearances: "Zientzia-dibulgazioa eta komunikabideak",
+    publications: "Ikerketa",
+    open: "Ireki"
+  }
+}[locale];
 ---
 
 <BaseLayout title={`${profile.title} | CV & Portfolio`} description={profile.summary} locale={locale}>
@@ -76,7 +124,7 @@ const copy = locale === "en"
     <section class="section" id="experience">
       <div class="section-heading">
         <p class="eyebrow">{copy.experience}</p>
-        <h2>{locale === "en" ? "Leadership across security-critical systems" : "Liderazgo en sistemas críticos para la seguridad"}</h2>
+        <h2>{headings.experience}</h2>
       </div>
       <div class="timeline">
         {content.experience.map(async (item) => {
@@ -104,7 +152,7 @@ const copy = locale === "en"
     <section class="section grid-section" id="work">
       <div class="section-heading">
         <p class="eyebrow">{copy.work}</p>
-        <h2>{locale === "en" ? "Projects and public work" : "Proyectos y trabajo público"}</h2>
+        <h2>{headings.work}</h2>
       </div>
       <div class="cards">
         {content.projects.map(async (item) => {
@@ -114,7 +162,7 @@ const copy = locale === "en"
               <p class="dates">{item.data.year}</p>
               <h3>{item.data.title}</h3>
               <div class="rich"><Content /></div>
-              {item.data.url && <a href={withBase(item.data.url)}>{locale === "en" ? "Open" : "Abrir"}</a>}
+              {item.data.url && <a href={withBase(item.data.url)}>{headings.open}</a>}
             </article>
           );
         })}
@@ -125,7 +173,7 @@ const copy = locale === "en"
       <div>
         <div class="section-heading compact">
           <p class="eyebrow">{copy.skills}</p>
-          <h2>{locale === "en" ? "Operating range" : "Áreas de trabajo"}</h2>
+          <h2>{headings.skills}</h2>
         </div>
         <div class="skill-list">
           {content.skills.map((group) => (
@@ -139,7 +187,7 @@ const copy = locale === "en"
       <div>
         <div class="section-heading compact">
           <p class="eyebrow">{copy.education}</p>
-          <h2>{locale === "en" ? "Academic foundation" : "Base académica"}</h2>
+          <h2>{headings.education}</h2>
         </div>
         <div class="education-list">
           {content.education.map((item) => (
@@ -157,7 +205,7 @@ const copy = locale === "en"
     <section class="section grid-section">
       <div class="section-heading">
         <p class="eyebrow">{copy.awards}</p>
-        <h2>{locale === "en" ? "Academic recognition and research support" : "Reconocimiento académico y apoyo a la investigación"}</h2>
+        <h2>{headings.awards}</h2>
       </div>
       <div class="cards awards">
         {content.awards.map(async (item) => {
@@ -178,7 +226,7 @@ const copy = locale === "en"
       <div>
         <div class="section-heading compact">
           <p class="eyebrow">{copy.appearances}</p>
-          <h2>{locale === "en" ? "Science communication and media" : "Divulgación científica y medios"}</h2>
+          <h2>{headings.appearances}</h2>
         </div>
         {content.appearances.map(async (item) => {
           const { Content } = await item.render();
@@ -187,7 +235,7 @@ const copy = locale === "en"
               <h3>{item.data.title}</h3>
               <p>{item.data.organization} · {item.data.year}</p>
               <div class="rich"><Content /></div>
-              {item.data.url && <a href={withBase(item.data.url)}>{locale === "en" ? "Open" : "Abrir"}</a>}
+              {item.data.url && <a href={withBase(item.data.url)}>{headings.open}</a>}
             </article>
           );
         })}
@@ -195,7 +243,7 @@ const copy = locale === "en"
       <div>
         <div class="section-heading compact">
           <p class="eyebrow">{copy.publications}</p>
-          <h2>{locale === "en" ? "Research" : "Investigación"}</h2>
+          <h2>{headings.publications}</h2>
         </div>
         {content.publications.map(async (item) => {
           const { Content } = await item.render();
@@ -204,7 +252,7 @@ const copy = locale === "en"
               <h3>{item.data.title}</h3>
               <p>{item.data.year}</p>
               <div class="rich"><Content /></div>
-              {item.data.url && <a href={withBase(item.data.url)}>{locale === "en" ? "Open" : "Abrir"}</a>}
+              {item.data.url && <a href={withBase(item.data.url)}>{headings.open}</a>}
             </article>
           );
         })}

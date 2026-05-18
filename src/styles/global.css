@@ -87,11 +87,23 @@ nav a {
   text-decoration: none;
 }
 
+.language-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .language {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--ink);
   padding: 8px 12px;
+}
+
+.language.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: white;
 }
 
 main {

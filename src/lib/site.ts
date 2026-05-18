@@ -1,15 +1,12 @@
 import { getCollection } from "astro:content";
 
-export type Locale = "en" | "es";
+export type Locale = "en" | "es" | "eu";
 
-export const locales: Record<Locale, { label: string; path: string; switchLabel: string }> = {
-  en: { label: "English", path: "/en/", switchLabel: "Español" },
-  es: { label: "Español", path: "/es/", switchLabel: "English" }
+export const locales: Record<Locale, { label: string; path: string }> = {
+  en: { label: "English", path: "/en/" },
+  es: { label: "Español", path: "/es/" },
+  eu: { label: "Euskara", path: "/eu/" }
 };
-
-export function otherLocale(locale: Locale): Locale {
-  return locale === "en" ? "es" : "en";
-}
 
 export function withBase(path: string): string {
   if (/^https?:\/\//.test(path) || path.startsWith("mailto:")) {
@@ -29,7 +26,7 @@ export async function getSiteContent(locale: Locale) {
   const yearScore = (value: unknown) => {
     const text = String(value ?? "");
 
-    if (/present|actualidad/i.test(text)) {
+    if (/present|actualidad|gaur egun/i.test(text)) {
       return 9999;
     }
 

@@ -8,6 +8,7 @@ Website content lives in:
 
 - `src/content/en`
 - `src/content/es`
+- `src/content/eu`
 
 Repository documentation lives in `docs/` and is not part of the website.
 

@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
 
-test("renders English and Spanish without mixing primary labels", async ({ page }) => {
+test("renders English, Spanish, and Basque without mixing primary labels", async ({ page }) => {
   await page.goto("/en/");
   await expect(page.getByRole("heading", { name: "Ander Galisteo" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Español" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Euskara" })).toBeVisible();
   await expect(page.locator("#experience").getByText("Experience", { exact: true })).toBeVisible();
   await expect(page.getByText("Experiencia", { exact: true })).toHaveCount(0);
 
@@ -11,6 +12,11 @@ test("renders English and Spanish without mixing primary labels", async ({ page 
   await expect(page.getByRole("heading", { name: "Ander Galisteo" })).toBeVisible();
   await expect(page.getByRole("link", { name: "English" })).toBeVisible();
   await expect(page.locator("#experience").getByText("Experiencia", { exact: true })).toBeVisible();
+
+  await page.goto("/eu/");
+  await expect(page.getByRole("heading", { name: "Ander Galisteo" })).toBeVisible();
+  await expect(page.locator("#experience").getByText("Esperientzia", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Español" })).toBeVisible();
 });
 
 test("has no public phone number and exposes downloadable CV", async ({ page }) => {

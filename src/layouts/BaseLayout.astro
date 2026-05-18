@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { withBase, locales, otherLocale, type Locale } from "@/lib/site";
+import { withBase, locales, type Locale } from "@/lib/site";
 
 interface Props {
   title: string;
@@ -9,7 +9,11 @@ interface Props {
 }
 
 const { title, description, locale } = Astro.props;
-const nextLocale = otherLocale(locale);
+const nav = {
+  en: { experience: "Experience", work: "Work", contact: "Contact" },
+  es: { experience: "Experiencia", work: "Trabajo", contact: "Contacto" },
+  eu: { experience: "Esperientzia", work: "Lana", contact: "Kontaktua" }
+}[locale];
 ---
 
 <!doctype html>
@@ -27,10 +31,14 @@ const nextLocale = otherLocale(locale);
         <span>Ander Galisteo</span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#experience">{locale === "en" ? "Experience" : "Experiencia"}</a>
-        <a href="#work">{locale === "en" ? "Work" : "Trabajo"}</a>
-        <a href="#contact">{locale === "en" ? "Contact" : "Contacto"}</a>
-        <a class="language" href={withBase(locales[nextLocale].path)}>{locales[locale].switchLabel}</a>
+        <a href="#experience">{nav.experience}</a>
+        <a href="#work">{nav.work}</a>
+        <a href="#contact">{nav.contact}</a>
+        <span class="language-group" aria-label="Language selection">
+          {Object.entries(locales).map(([code, info]) => (
+            <a class:list={["language", { active: code === locale }]} href={withBase(info.path)}>{info.label}</a>
+          ))}
+        </span>
       </nav>
     </header>
     <slot />

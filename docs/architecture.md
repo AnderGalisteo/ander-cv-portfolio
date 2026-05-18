@@ -13,7 +13,7 @@ This repository is the source of truth for Ander Galisteo's CV and portfolio web
 
 - Astro renders the static website.
 - Markdown content lives under `src/content/en` and `src/content/es`.
-- The root URL redirects to English; `/en/` and `/es/` are fully separate language views.
+- The root URL redirects to English; `/en/`, `/es/`, and `/eu/` are fully separate language views.
 - `docs/` is repository documentation only and is not imported by the website.
 
 ## Deployment
@@ -26,5 +26,6 @@ Edit Markdown files under the matching locale folder:
 
 - `src/content/en`
 - `src/content/es`
+- `src/content/eu`
 
 Each file must include valid frontmatter. Run `npm run validate` before committing content changes.
