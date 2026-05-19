@@ -6,14 +6,20 @@ interface Props {
   title: string;
   description: string;
   locale: Locale;
+  page?: "home" | "experience" | "work" | "research" | "recognition" | "contact";
 }
 
-const { title, description, locale } = Astro.props;
+const { title, description, locale, page = "home" } = Astro.props;
 const nav = {
-  en: { experience: "Experience", work: "Work", contact: "Contact" },
-  es: { experience: "Experiencia", work: "Trabajo", contact: "Contacto" },
-  eu: { experience: "Esperientzia", work: "Lana", contact: "Kontaktua" }
+  en: { home: "Home", experience: "Experience", work: "Portfolio", research: "Research", recognition: "Recognition", contact: "Contact" },
+  es: { home: "Inicio", experience: "Experiencia", work: "Portfolio", research: "Investigación", recognition: "Reconocimiento", contact: "Contacto" },
+  eu: { home: "Hasiera", experience: "Esperientzia", work: "Portfolioa", research: "Ikerketa", recognition: "Aitorpena", contact: "Kontaktua" }
 }[locale];
+
+const pagePath = (targetLocale: Locale, targetPage = page) => {
+  const suffix = targetPage === "home" ? "" : `${targetPage}/`;
+  return withBase(`/${targetLocale}/${suffix}`);
+};
 ---
 
 <!doctype html>
@@ -31,12 +37,15 @@ const nav = {
         <span>Ander Galisteo</span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#experience">{nav.experience}</a>
-        <a href="#work">{nav.work}</a>
-        <a href="#contact">{nav.contact}</a>
+        <a class:list={{ active: page === "home" }} href={pagePath(locale, "home")}>{nav.home}</a>
+        <a class:list={{ active: page === "experience" }} href={pagePath(locale, "experience")}>{nav.experience}</a>
+        <a class:list={{ active: page === "work" }} href={pagePath(locale, "work")}>{nav.work}</a>
+        <a class:list={{ active: page === "research" }} href={pagePath(locale, "research")}>{nav.research}</a>
+        <a class:list={{ active: page === "recognition" }} href={pagePath(locale, "recognition")}>{nav.recognition}</a>
+        <a class:list={{ active: page === "contact" }} href={pagePath(locale, "contact")}>{nav.contact}</a>
         <span class="language-group" aria-label="Language selection">
           {Object.entries(locales).map(([code, info]) => (
-            <a class:list={["language", { active: code === locale }]} href={withBase(info.path)}>{info.label}</a>
+            <a class:list={["language", { active: code === locale }]} href={pagePath(code as Locale)}>{info.label}</a>
           ))}
         </span>
       </nav>

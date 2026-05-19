@@ -96,6 +96,11 @@ nav a:hover {
   color: var(--ink);
 }
 
+nav a.active:not(.language) {
+  color: var(--accent-dark);
+  font-weight: 780;
+}
+
 .language-group {
   display: inline-flex;
   flex-wrap: wrap;
@@ -403,15 +408,43 @@ h3 {
 
 .text-link,
 .card a,
-.list-item a {
+.list-item a,
+.section-more {
   color: var(--accent-dark);
   display: inline-flex;
   font-weight: 780;
   margin-top: 10px;
 }
 
+.section-more {
+  margin-top: 28px;
+}
+
 .section {
   padding: clamp(64px, 8vw, 112px) clamp(20px, 6vw, 76px);
+}
+
+.page-hero {
+  background:
+    linear-gradient(135deg, rgba(20, 117, 111, 0.12), rgba(105, 75, 124, 0.08)),
+    var(--surface);
+  padding: clamp(70px, 10vw, 132px) clamp(20px, 6vw, 76px);
+}
+
+.page-hero > div {
+  max-width: 960px;
+}
+
+.page-hero h1 {
+  font-size: clamp(3rem, 7vw, 6.4rem);
+}
+
+.page-hero p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 1.12rem;
+  line-height: 1.72;
+  margin-top: 24px;
+  max-width: 760px;
 }
 
 .grid-section {
@@ -548,6 +581,10 @@ h3 {
   gap: 12px;
 }
 
+.wide-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .education-list span {
   color: var(--accent-dark);
   display: inline-block;
@@ -619,6 +656,32 @@ h3 {
   color: white;
 }
 
+.contact-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+}
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 42px);
+}
+
+.contact-card p:not(.eyebrow),
+.contact-card li {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.contact-card ul {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 0;
+  padding-left: 20px;
+}
+
 footer {
   align-items: center;
   background: var(--ink);
@@ -653,7 +716,9 @@ footer p {
   .hero,
   .findout,
   .split-section,
-  .latest-section {
+  .latest-section,
+  .contact-grid,
+  .wide-list {
     grid-template-columns: 1fr;
   }
 
@@ -698,10 +763,6 @@ footer p {
 
   nav {
     gap: 10px;
-  }
-
-  nav a:not(.language) {
-    display: none;
   }
 
   h1 {

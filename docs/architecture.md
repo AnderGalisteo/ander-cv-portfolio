@@ -14,6 +14,7 @@ This repository is the source of truth for Ander Galisteo's CV and portfolio web
 - Astro renders the static website.
 - Markdown content lives under `src/content/en` and `src/content/es`.
 - The root URL redirects to English; `/en/`, `/es/`, and `/eu/` are fully separate language views.
+- Each locale has a small multipage structure: home, experience, portfolio, research, recognition, and contact.
 - `docs/` is repository documentation only and is not imported by the website.
 
 ## Deployment

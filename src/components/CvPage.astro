@@ -2,13 +2,17 @@
 import { getSiteContent, withBase, type Locale } from "@/lib/site";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
+type PageKind = "home" | "experience" | "work" | "research" | "recognition" | "contact";
+
 interface Props {
   locale: Locale;
+  page?: PageKind;
 }
 
-const { locale } = Astro.props;
+const { locale, page = "home" } = Astro.props;
 const content = await getSiteContent(locale);
 const profile = content.profile.data;
+const route = (target: PageKind) => withBase(`/${locale}/${target === "home" ? "" : `${target}/`}`);
 
 const copy = {
   en: {
@@ -23,17 +27,21 @@ const copy = {
     appearances: "Public Appearances",
     awards: "Awards & Scholarships",
     publications: "Publications",
-    source: "Content is maintained through Markdown files in GitHub.",
     featured: "Featured",
     explore: "Explore the profile",
     profileCta: "A Markdown-powered portfolio for cybersecurity leadership, research, publications, and public work.",
     currentWork: "Current focus",
     researchWork: "Research track",
+    researchIntro: "Publications, PhD work, and visible-light communication research for IoT and embedded systems.",
     recognition: "Recognition",
     finalTitle: "Build secure industrial systems with evidence, clarity, and delivery discipline.",
     finalText: "For collaborations, advisory work, or industrial cybersecurity programs, get in touch.",
+    viewAll: "View all",
     viewWork: "View work",
-    open: "Open"
+    open: "Open",
+    contactLead: "The best starting point is email. The public profile keeps a downloadable CV and LinkedIn available without publishing a phone number.",
+    contactTitle: "Let’s talk about industrial cybersecurity, embedded systems, or research-driven engineering.",
+    homeIntro: "This site is organized as a portfolio rather than a single long CV: start with the overview, then move into experience, work, research, recognition, or contact."
   },
   es: {
     availability: "Ciberseguridad industrial, seguridad OT/IoT, sistemas embebidos y liderazgo de ingeniería.",
@@ -47,17 +55,21 @@ const copy = {
     appearances: "Apariciones públicas",
     awards: "Premios y becas",
     publications: "Publicaciones",
-    source: "El contenido se mantiene mediante archivos Markdown en GitHub.",
     featured: "Destacado",
     explore: "Explorar el perfil",
     profileCta: "Un portfolio mantenido en Markdown para liderazgo en ciberseguridad, investigación, publicaciones y trabajo público.",
     currentWork: "Foco actual",
     researchWork: "Trayectoria investigadora",
+    researchIntro: "Publicaciones, tesis doctoral e investigación en comunicación por luz visible para IoT y sistemas embebidos.",
     recognition: "Reconocimiento",
     finalTitle: "Construir sistemas industriales seguros con evidencia, claridad y disciplina de entrega.",
     finalText: "Para colaboraciones, asesoramiento o programas de ciberseguridad industrial, ponte en contacto.",
+    viewAll: "Ver todo",
     viewWork: "Ver trabajo",
-    open: "Abrir"
+    open: "Abrir",
+    contactLead: "El mejor punto de partida es el correo. El perfil público mantiene el CV descargable y LinkedIn sin publicar un teléfono.",
+    contactTitle: "Hablemos sobre ciberseguridad industrial, sistemas embebidos o ingeniería basada en investigación.",
+    homeIntro: "Este sitio está organizado como portfolio, no como un único CV largo: empieza por el resumen y luego entra en experiencia, trabajo, investigación, reconocimiento o contacto."
   },
   eu: {
     availability: "Zibersegurtasun industriala, OT/IoT segurtasuna, sistema txertatuak eta ingeniaritza-lidergoa.",
@@ -71,17 +83,21 @@ const copy = {
     appearances: "Agerpen publikoak",
     awards: "Sariak eta bekak",
     publications: "Argitalpenak",
-    source: "Edukia GitHubeko Markdown fitxategien bidez mantentzen da.",
     featured: "Nabarmena",
     explore: "Profila arakatu",
     profileCta: "Markdown bidez mantendutako portfolioa zibersegurtasuneko lidergorako, ikerketarako, argitalpenetarako eta lan publikorako.",
     currentWork: "Egungo fokua",
     researchWork: "Ikerketa-ibilbidea",
+    researchIntro: "Argitalpenak, doktorego-tesia eta IoT eta sistema txertatuetarako argi ikusgai bidezko komunikazioaren ikerketa.",
     recognition: "Aitorpena",
     finalTitle: "Sistema industrial seguruak eraikitzea ebidentziarekin, argitasunarekin eta entrega-diziplinarekin.",
     finalText: "Lankidetzetarako, aholkularitzarako edo zibersegurtasun industrialeko programetarako, jarri harremanetan.",
+    viewAll: "Dena ikusi",
     viewWork: "Lana ikusi",
-    open: "Ireki"
+    open: "Ireki",
+    contactLead: "Abiapuntu onena posta elektronikoa da. Profil publikoak CV deskargagarria eta LinkedIn mantentzen ditu, telefono zenbakirik argitaratu gabe.",
+    contactTitle: "Hitz egin dezagun zibersegurtasun industrialaz, sistema txertatuez edo ikerketan oinarritutako ingeniaritzaz.",
+    homeIntro: "Gune hau portfolio gisa antolatuta dago, ez CV luze bakar gisa: hasi laburpenarekin eta jo esperientziara, lanera, ikerketara, aitorpenera edo kontaktura."
   }
 }[locale];
 
@@ -94,6 +110,7 @@ const headings = {
     awards: "Academic recognition and research support",
     appearances: "Science communication and media",
     publications: "Research",
+    contact: "Contact",
     stats: [
       { value: "70%", label: "risk exposure reduction" },
       { value: "50+", label: "client projects" },
@@ -109,6 +126,7 @@ const headings = {
     awards: "Reconocimiento académico y apoyo a la investigación",
     appearances: "Divulgación científica y medios",
     publications: "Investigación",
+    contact: "Contacto",
     stats: [
       { value: "70%", label: "reducción de exposición" },
       { value: "50+", label: "proyectos de cliente" },
@@ -124,6 +142,7 @@ const headings = {
     awards: "Aitorpen akademikoa eta ikerketarako laguntza",
     appearances: "Zientzia-dibulgazioa eta komunikabideak",
     publications: "Ikerketa",
+    contact: "Kontaktua",
     stats: [
       { value: "70%", label: "esposizioaren murrizketa" },
       { value: "50+", label: "bezero-proiektu" },
@@ -136,209 +155,342 @@ const headings = {
 const leadProject = content.projects[0];
 const leadPublication = content.publications[0];
 const leadAward = content.awards[0];
+const pageTitles: Record<PageKind, string> = {
+  home: profile.title,
+  experience: copy.experience,
+  work: copy.work,
+  research: copy.publications,
+  recognition: copy.recognition,
+  contact: copy.contact
+};
+const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTitles[page]} | ${profile.title}`;
 ---
 
-<BaseLayout title={`${profile.title} | CV & Portfolio`} description={profile.summary} locale={locale}>
+<BaseLayout title={title} description={profile.summary} locale={locale} page={page}>
   <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">{profile.location}</p>
-        <h1>{profile.title}</h1>
-        <p class="role">{profile.role}</p>
-        <p class="summary">{profile.summary}</p>
-        <div class="actions" id="contact">
-          <a class="button primary" href={`mailto:${profile.email}`}>{copy.contact}</a>
-          <a class="button" href={withBase(profile.cv)}>{copy.download}</a>
-          <a class="button ghost" href={profile.linkedin}>LinkedIn</a>
-        </div>
-      </div>
-      <aside class="hero-visual" aria-label={copy.impact}>
-        <img
-          src={withBase("/images/industrial-cybersecurity-hero.png")}
-          alt=""
-          aria-hidden="true"
-        />
-        <div class="impact-card">
-          <p class="eyebrow">{copy.impact}</p>
-          <ul>
-            {profile.highlights.slice(0, 4).map((item: string) => <li>{item}</li>)}
-          </ul>
-        </div>
-      </aside>
-    </section>
+    {page === "home" && (
+      <>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">{profile.location}</p>
+            <h1>{profile.title}</h1>
+            <p class="role">{profile.role}</p>
+            <p class="summary">{profile.summary}</p>
+            <p class="summary">{copy.homeIntro}</p>
+            <div class="actions" id="contact">
+              <a class="button primary" href={route("contact")}>{copy.contact}</a>
+              <a class="button" href={withBase(profile.cv)}>{copy.download}</a>
+              <a class="button ghost" href={profile.linkedin}>LinkedIn</a>
+            </div>
+          </div>
+          <aside class="hero-visual" aria-label={copy.impact}>
+            <img src={withBase("/images/industrial-cybersecurity-hero.png")} alt="" aria-hidden="true" />
+            <div class="impact-card">
+              <p class="eyebrow">{copy.impact}</p>
+              <ul>
+                {profile.highlights.slice(0, 4).map((item: string) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </aside>
+        </section>
 
-    <section class="feature-band" aria-label="Career metrics">
-      <div class="section-heading centered">
-        <p class="eyebrow">{copy.featured}</p>
-        <h2>{copy.explore}</h2>
-        <p>{copy.profileCta}</p>
-      </div>
-      <div class="metric-grid">
-        {headings.stats.map((stat) => (
-          <article class="metric">
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
+        <section class="feature-band" aria-label="Career metrics">
+          <div class="section-heading centered">
+            <p class="eyebrow">{copy.featured}</p>
+            <h2>{copy.explore}</h2>
+            <p>{copy.profileCta}</p>
+          </div>
+          <div class="metric-grid">
+            {headings.stats.map((stat) => (
+              <article class="metric">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="findout">
+          <article>
+            <p class="eyebrow">{copy.currentWork}</p>
+            <h2>{headings.experience}</h2>
+            <p>{copy.availability}</p>
+            <a class="text-link" href={route("experience")}>{copy.experience}</a>
           </article>
-        ))}
-      </div>
-    </section>
+          <article>
+            <p class="eyebrow">{copy.researchWork}</p>
+            <h2>{headings.publications}</h2>
+            <p>{copy.researchIntro}</p>
+            <a class="text-link" href={route("research")}>{copy.publications}</a>
+          </article>
+        </section>
 
-    <section class="findout">
-      <article>
-        <p class="eyebrow">{copy.currentWork}</p>
-        <h2>{headings.experience}</h2>
-        <p>{copy.availability}</p>
-        <a class="text-link" href="#experience">{copy.experience}</a>
-      </article>
-      <article>
-        <p class="eyebrow">{copy.researchWork}</p>
-        <h2>{headings.publications}</h2>
-        <p>{copy.source}</p>
-        <a class="text-link" href="#publications">{copy.publications}</a>
-      </article>
-    </section>
+        <section class="section grid-section">
+          <div class="section-heading">
+            <p class="eyebrow">{copy.work}</p>
+            <h2>{headings.work}</h2>
+          </div>
+          <div class="cards">
+            {content.projects.slice(0, 3).map(async (item) => {
+              const { Content } = await item.render();
+              return (
+                <article class:list={["card", { "feature-card": item.id === leadProject?.id }]}>
+                  <p class="dates">{item.data.year}</p>
+                  <h3>{item.data.title}</h3>
+                  <div class="rich"><Content /></div>
+                  {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+                </article>
+              );
+            })}
+          </div>
+          <a class="section-more" href={route("work")}>{copy.viewAll}</a>
+        </section>
 
-    <section class="section grid-section" id="work">
-      <div class="section-heading">
-        <p class="eyebrow">{copy.work}</p>
-        <h2>{headings.work}</h2>
-      </div>
-      <div class="cards">
-        {content.projects.map(async (item) => {
-          const { Content } = await item.render();
-          return (
-            <article class:list={["card", { "feature-card": item.id === leadProject?.id }]}>
-              <p class="dates">{item.data.year}</p>
-              <h3>{item.data.title}</h3>
-              <div class="rich"><Content /></div>
-              {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
-            </article>
-          );
-        })}
-      </div>
-    </section>
+        <section class="section latest-section">
+          <div>
+            <div class="section-heading compact">
+              <p class="eyebrow">{copy.publications}</p>
+              <h2>{headings.publications}</h2>
+            </div>
+            <div class="latest-list">
+              {content.publications.slice(0, 3).map(async (item) => {
+                const { Content } = await item.render();
+                return (
+                  <article class:list={["list-item", { "feature-card": item.id === leadPublication?.id }]}>
+                    <h3>{item.data.title}</h3>
+                    <p>{item.data.year}</p>
+                    <div class="rich"><Content /></div>
+                    {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+                  </article>
+                );
+              })}
+            </div>
+            <a class="section-more" href={route("research")}>{copy.viewAll}</a>
+          </div>
+          <div>
+            <div class="section-heading compact">
+              <p class="eyebrow">{copy.awards}</p>
+              <h2>{copy.recognition}</h2>
+            </div>
+            <div class="latest-list">
+              {content.awards.slice(0, 3).map(async (item) => {
+                const { Content } = await item.render();
+                return (
+                  <article class:list={["list-item", { "feature-card": item.id === leadAward?.id }]}>
+                    <h3>{item.data.title}</h3>
+                    <p>{item.data.organization} · {item.data.year}</p>
+                    <div class="rich"><Content /></div>
+                  </article>
+                );
+              })}
+            </div>
+            <a class="section-more" href={route("recognition")}>{copy.viewAll}</a>
+          </div>
+        </section>
+      </>
+    )}
 
-    <section class="section section-plain" id="experience">
-      <div class="section-heading">
-        <p class="eyebrow">{copy.experience}</p>
-        <h2>{headings.experience}</h2>
-      </div>
-      <div class="timeline">
-        {content.experience.map(async (item) => {
-          const { Content } = await item.render();
-          const period = item.data.start === item.data.end ? item.data.start : `${item.data.start} - ${item.data.end}`;
-          return (
-            <article class="timeline-item">
-              <div>
-                <p class="dates">{period}</p>
-                <h3>{item.data.title}</h3>
-                <p class="meta">{item.data.company} · {item.data.location}</p>
-              </div>
-              <div class="rich">
-                <Content />
-                <div class="tags">
-                  {item.data.technologies.map((tech: string) => <span>{tech}</span>)}
-                </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-
-    <section class="section split-section">
-      <div>
-        <div class="section-heading compact">
-          <p class="eyebrow">{copy.skills}</p>
-          <h2>{headings.skills}</h2>
+    {page !== "home" && (
+      <section class="page-hero">
+        <div>
+          <p class="eyebrow">{profile.title}</p>
+          <h1>{pageTitles[page]}</h1>
+          <p>{page === "contact" ? copy.contactLead : profile.summary}</p>
         </div>
-        <div class="feature-list">
-          {content.skills.map((group) => (
-            <article>
-              <h3>{group.data.title}</h3>
-              <p>{group.data.skills.join(" · ")}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-      <div>
-        <div class="section-heading compact">
-          <p class="eyebrow">{copy.education}</p>
-          <h2>{headings.education}</h2>
-        </div>
-        <div class="education-list">
-          {content.education.map((item) => (
-            <article>
-              <p class="dates">{item.data.period}</p>
-              <h3>{item.data.degree}</h3>
-              <p>{item.data.institution} · {item.data.location}</p>
-              {item.data.note && <span>{item.data.note}</span>}
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+      </section>
+    )}
 
-    <section class="section recognition-section">
-      <div class="section-heading centered">
-        <p class="eyebrow">{copy.awards}</p>
-        <h2>{headings.awards}</h2>
-      </div>
-      <div class="awards-grid">
-        {content.awards.map(async (item) => {
-          const { Content } = await item.render();
-          return (
-            <article class:list={["award-item", { "feature-card": item.id === leadAward?.id }]}>
-              <p class="dates">{item.data.year}</p>
-              <h3>{item.data.title}</h3>
-              {item.data.organization && <p class="meta">{item.data.organization}</p>}
-              <div class="rich"><Content /></div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
+    {page === "experience" && (
+      <>
+        <section class="section section-plain" id="experience">
+          <div class="section-heading">
+            <p class="eyebrow">{copy.experience}</p>
+            <h2>{headings.experience}</h2>
+          </div>
+          <div class="timeline">
+            {content.experience.map(async (item) => {
+              const { Content } = await item.render();
+              const period = item.data.start === item.data.end ? item.data.start : `${item.data.start} - ${item.data.end}`;
+              return (
+                <article class="timeline-item">
+                  <div>
+                    <p class="dates">{period}</p>
+                    <h3>{item.data.title}</h3>
+                    <p class="meta">{item.data.company} · {item.data.location}</p>
+                  </div>
+                  <div class="rich">
+                    <Content />
+                    <div class="tags">
+                      {item.data.technologies.map((tech: string) => <span>{tech}</span>)}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
 
-    <section class="section latest-section" id="publications">
-      <div>
-        <div class="section-heading compact">
-          <p class="eyebrow">{copy.appearances}</p>
-          <h2>{headings.appearances}</h2>
+        <section class="section split-section">
+          <div>
+            <div class="section-heading compact">
+              <p class="eyebrow">{copy.skills}</p>
+              <h2>{headings.skills}</h2>
+            </div>
+            <div class="feature-list">
+              {content.skills.map((group) => (
+                <article>
+                  <h3>{group.data.title}</h3>
+                  <p>{group.data.skills.join(" · ")}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div class="section-heading compact">
+              <p class="eyebrow">{copy.education}</p>
+              <h2>{headings.education}</h2>
+            </div>
+            <div class="education-list">
+              {content.education.map((item) => (
+                <article>
+                  <p class="dates">{item.data.period}</p>
+                  <h3>{item.data.degree}</h3>
+                  <p>{item.data.institution} · {item.data.location}</p>
+                  {item.data.note && <span>{item.data.note}</span>}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </>
+    )}
+
+    {page === "work" && (
+      <section class="section grid-section">
+        <div class="section-heading">
+          <p class="eyebrow">{copy.work}</p>
+          <h2>{headings.work}</h2>
         </div>
-        <div class="latest-list">
-          {content.appearances.map(async (item) => {
+        <div class="cards">
+          {content.projects.map(async (item) => {
             const { Content } = await item.render();
             return (
-              <article class="list-item">
+              <article class:list={["card", { "feature-card": item.id === leadProject?.id }]}>
+                <p class="dates">{item.data.year}</p>
                 <h3>{item.data.title}</h3>
-                <p>{item.data.organization} · {item.data.year}</p>
                 <div class="rich"><Content /></div>
                 {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
               </article>
             );
           })}
         </div>
-      </div>
-      <div>
-        <div class="section-heading compact">
-          <p class="eyebrow">{copy.publications}</p>
-          <h2>{headings.publications}</h2>
+      </section>
+    )}
+
+    {page === "research" && (
+      <section class="section latest-section">
+        <div>
+          <div class="section-heading compact">
+            <p class="eyebrow">{copy.publications}</p>
+            <h2>{headings.publications}</h2>
+          </div>
+          <div class="latest-list">
+            {content.publications.map(async (item) => {
+              const { Content } = await item.render();
+              return (
+                <article class:list={["list-item", { "feature-card": item.id === leadPublication?.id }]}>
+                  <h3>{item.data.title}</h3>
+                  <p>{item.data.year}</p>
+                  <div class="rich"><Content /></div>
+                  {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+                </article>
+              );
+            })}
+          </div>
         </div>
-        <div class="latest-list">
-          {content.publications.map(async (item) => {
-            const { Content } = await item.render();
-            return (
-              <article class:list={["list-item", { "feature-card": item.id === leadPublication?.id }]}>
-                <h3>{item.data.title}</h3>
-                <p>{item.data.year}</p>
-                <div class="rich"><Content /></div>
-                {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+        <div>
+          <div class="section-heading compact">
+            <p class="eyebrow">{copy.skills}</p>
+            <h2>{copy.researchWork}</h2>
+          </div>
+          <div class="feature-list">
+            {content.skills.slice(1, 4).map((group) => (
+              <article>
+                <h3>{group.data.title}</h3>
+                <p>{group.data.skills.join(" · ")}</p>
               </article>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
+
+    {page === "recognition" && (
+      <>
+        <section class="section recognition-section">
+          <div class="section-heading centered">
+            <p class="eyebrow">{copy.awards}</p>
+            <h2>{headings.awards}</h2>
+          </div>
+          <div class="awards-grid">
+            {content.awards.map(async (item) => {
+              const { Content } = await item.render();
+              return (
+                <article class:list={["award-item", { "feature-card": item.id === leadAward?.id }]}>
+                  <p class="dates">{item.data.year}</p>
+                  <h3>{item.data.title}</h3>
+                  {item.data.organization && <p class="meta">{item.data.organization}</p>}
+                  <div class="rich"><Content /></div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section class="section section-plain">
+          <div class="section-heading">
+            <p class="eyebrow">{copy.appearances}</p>
+            <h2>{headings.appearances}</h2>
+          </div>
+          <div class="latest-list wide-list">
+            {content.appearances.map(async (item) => {
+              const { Content } = await item.render();
+              return (
+                <article class="list-item">
+                  <h3>{item.data.title}</h3>
+                  <p>{item.data.organization} · {item.data.year}</p>
+                  <div class="rich"><Content /></div>
+                  {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </>
+    )}
+
+    {page === "contact" && (
+      <section class="section section-plain">
+        <div class="contact-grid">
+          <article class="contact-card feature-card">
+            <p class="eyebrow">{copy.contact}</p>
+            <h2>{copy.contactTitle}</h2>
+            <p>{copy.contactLead}</p>
+            <div class="actions">
+              <a class="button primary" href={`mailto:${profile.email}`}>{profile.email}</a>
+              <a class="button" href={withBase(profile.cv)}>{copy.download}</a>
+              <a class="button ghost" href={profile.linkedin}>LinkedIn</a>
+            </div>
+          </article>
+          <article class="contact-card">
+            <p class="eyebrow">{copy.impact}</p>
+            <ul>
+              {profile.highlights.map((item: string) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
+      </section>
+    )}
 
     <section class="cta-section">
       <div>
@@ -347,8 +499,8 @@ const leadAward = content.awards[0];
         <p>{copy.finalText}</p>
       </div>
       <div class="actions">
-        <a class="button primary" href={`mailto:${profile.email}`}>{copy.contact}</a>
-        <a class="button" href="#work">{copy.viewWork}</a>
+        <a class="button primary" href={route("contact")}>{copy.contact}</a>
+        <a class="button" href={route("work")}>{copy.viewWork}</a>
       </div>
     </section>
   </main>
