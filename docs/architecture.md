@@ -22,6 +22,12 @@ The `Deploy website` workflow validates content, builds Astro, uploads `dist`, a
 The site also declares `andergalisteo.com` as its custom domain through `public/CNAME`, which Astro copies into the generated `dist` folder on every build.
 DNS for the apex domain must point to GitHub Pages; the GitHub-hosted URL remains available at `https://andergalisteo.github.io/`.
 
+Required DNS records:
+
+- `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+- `AAAA` records for `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+- `CNAME` record for `www`: `andergalisteo.github.io`
+
 ## Updating Content
 
 Edit Markdown files under the matching locale folder:
