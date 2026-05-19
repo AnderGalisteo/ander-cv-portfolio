@@ -323,6 +323,10 @@ h3 {
   padding: clamp(64px, 8vw, 104px) clamp(20px, 6vw, 76px);
 }
 
+.service-section {
+  background: var(--surface);
+}
+
 .section-heading {
   margin-bottom: 42px;
   max-width: 800px;
@@ -463,6 +467,9 @@ h3 {
 }
 
 .card,
+.case-card,
+.service-card,
+.thesis-card,
 .feature-list article,
 .education-list article,
 .list-item,
@@ -475,6 +482,9 @@ h3 {
 }
 
 .card,
+.case-card,
+.service-card,
+.thesis-card,
 .award-item,
 .list-item,
 .feature-list article,
@@ -486,6 +496,9 @@ h3 {
 }
 
 .card:hover,
+.case-card:hover,
+.service-card:hover,
+.thesis-card:hover,
 .award-item:hover,
 .list-item:hover,
 .feature-list article:hover,
@@ -497,6 +510,52 @@ h3 {
 
 .card {
   min-height: 270px;
+}
+
+.service-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.service-card {
+  min-height: 220px;
+}
+
+.service-card p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.case-study-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.case-card {
+  display: grid;
+  gap: clamp(20px, 4vw, 52px);
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+}
+
+.case-card dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.case-card dt {
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 780;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.case-card dd {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
 }
 
 .feature-card {
@@ -568,7 +627,8 @@ h3 {
 }
 
 .split-section,
-.latest-section {
+.latest-section,
+.research-section {
   display: grid;
   gap: clamp(28px, 5vw, 58px);
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -576,9 +636,33 @@ h3 {
 
 .feature-list,
 .education-list,
-.latest-list {
+.latest-list,
+.research-aside {
   display: grid;
   gap: 12px;
+}
+
+.research-section {
+  align-items: start;
+}
+
+.research-aside {
+  align-content: start;
+  position: sticky;
+  top: 92px;
+}
+
+.thesis-card {
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.thesis-card h3 {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.thesis-card p {
+  color: var(--muted);
+  line-height: 1.65;
 }
 
 .wide-list {
@@ -717,9 +801,15 @@ footer p {
   .findout,
   .split-section,
   .latest-section,
+  .research-section,
   .contact-grid,
-  .wide-list {
+  .wide-list,
+  .case-card {
     grid-template-columns: 1fr;
+  }
+
+  .research-aside {
+    position: static;
   }
 
   .hero {
@@ -747,6 +837,7 @@ footer p {
 
   .metric-grid,
   .cards,
+  .service-grid,
   .awards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -784,6 +875,7 @@ footer p {
 
   .metric-grid,
   .cards,
+  .service-grid,
   .awards-grid {
     grid-template-columns: 1fr;
   }

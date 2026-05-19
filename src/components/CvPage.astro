@@ -30,9 +30,26 @@ const copy = {
     featured: "Featured",
     explore: "Explore the profile",
     profileCta: "A Markdown-powered portfolio for cybersecurity leadership, research, publications, and public work.",
+    serviceEyebrow: "What I do",
+    serviceTitle: "Security work across strategy, systems, and delivery",
+    serviceIntro: "I combine executive security direction with embedded-systems depth and delivery experience for organizations building or operating security-critical technology.",
+    services: [
+      { title: "OT/IoT security strategy", text: "Threat modeling, roadmap definition, executive risk framing, and remediation programs for industrial and critical-infrastructure environments." },
+      { title: "Embedded security engineering", text: "Secure architecture, cryptography, secure boot, OTA hardening, protocol security, and practical implementation guidance for product teams." },
+      { title: "Engineering leadership", text: "Delivery governance, team scaling, stakeholder communication, and measurable improvements across complex firmware and security programs." }
+    ],
     currentWork: "Current focus",
     researchWork: "Research track",
     researchIntro: "Publications, PhD work, and visible-light communication research for IoT and embedded systems.",
+    workIntro: "Selected work is framed around the problem, the role, and the kind of impact delivered.",
+    caseRole: "Role",
+    caseRoleText: "Strategy, architecture, engineering leadership, or research-to-prototype delivery depending on the engagement.",
+    caseImpact: "Impact",
+    caseImpactText: "Risk reduction, clearer delivery, stronger security posture, or reusable technical foundations.",
+    thesisLabel: "PhD thesis",
+    thesisIntro: "Doctoral research on visible light communication networks for IoT and their applications.",
+    researchFocusTitle: "Research focus",
+    researchFocusText: "Visible light communication, IoT networking, embedded prototypes, and secure systems engineering.",
     recognition: "Recognition",
     finalTitle: "Build secure industrial systems with evidence, clarity, and delivery discipline.",
     finalText: "For collaborations, advisory work, or industrial cybersecurity programs, get in touch.",
@@ -58,9 +75,26 @@ const copy = {
     featured: "Destacado",
     explore: "Explorar el perfil",
     profileCta: "Un portfolio mantenido en Markdown para liderazgo en ciberseguridad, investigación, publicaciones y trabajo público.",
+    serviceEyebrow: "Qué hago",
+    serviceTitle: "Seguridad entre estrategia, sistemas y entrega",
+    serviceIntro: "Combino dirección ejecutiva de seguridad con profundidad en sistemas embebidos y experiencia de entrega para organizaciones que construyen u operan tecnología crítica.",
+    services: [
+      { title: "Estrategia de seguridad OT/IoT", text: "Modelado de amenazas, definición de roadmap, comunicación ejecutiva del riesgo y programas de remediación para entornos industriales y críticos." },
+      { title: "Ingeniería de seguridad embebida", text: "Arquitectura segura, criptografía, arranque seguro, endurecimiento OTA, seguridad de protocolos y guía práctica para equipos de producto." },
+      { title: "Liderazgo de ingeniería", text: "Gobernanza de entrega, escalado de equipos, comunicación con stakeholders y mejoras medibles en programas complejos de firmware y seguridad." }
+    ],
     currentWork: "Foco actual",
     researchWork: "Trayectoria investigadora",
     researchIntro: "Publicaciones, tesis doctoral e investigación en comunicación por luz visible para IoT y sistemas embebidos.",
+    workIntro: "El trabajo seleccionado se presenta alrededor del problema, el rol y el tipo de impacto conseguido.",
+    caseRole: "Rol",
+    caseRoleText: "Estrategia, arquitectura, liderazgo de ingeniería o transferencia de investigación a prototipo según el proyecto.",
+    caseImpact: "Impacto",
+    caseImpactText: "Reducción de riesgo, mejor entrega, mayor madurez de seguridad o bases técnicas reutilizables.",
+    thesisLabel: "Tesis doctoral",
+    thesisIntro: "Investigación doctoral sobre redes de comunicación por luz visible para IoT y sus aplicaciones.",
+    researchFocusTitle: "Foco investigador",
+    researchFocusText: "Comunicación por luz visible, redes IoT, prototipos embebidos e ingeniería de sistemas seguros.",
     recognition: "Reconocimiento",
     finalTitle: "Construir sistemas industriales seguros con evidencia, claridad y disciplina de entrega.",
     finalText: "Para colaboraciones, asesoramiento o programas de ciberseguridad industrial, ponte en contacto.",
@@ -86,9 +120,26 @@ const copy = {
     featured: "Nabarmena",
     explore: "Profila arakatu",
     profileCta: "Markdown bidez mantendutako portfolioa zibersegurtasuneko lidergorako, ikerketarako, argitalpenetarako eta lan publikorako.",
+    serviceEyebrow: "Zer egiten dut",
+    serviceTitle: "Segurtasuna estrategian, sistemetan eta entregan",
+    serviceIntro: "Segurtasun-zuzendaritza, sistema txertatuetako sakontasuna eta entrega-esperientzia uztartzen ditut teknologia kritikoa eraiki edo operatzen duten erakundeentzat.",
+    services: [
+      { title: "OT/IoT segurtasun-estrategia", text: "Mehatxu-modelaketa, roadmap definizioa, arriskuaren komunikazio exekutiboa eta remediatze-programak ingurune industrial eta kritikoetarako." },
+      { title: "Segurtasun txertatuaren ingeniaritza", text: "Arkitektura segurua, kriptografia, secure boot, OTA gogortzea, protokoloen segurtasuna eta produktu-taldeentzako gida praktikoa." },
+      { title: "Ingeniaritza-lidergoa", text: "Entrega-gobernantza, taldeen eskalatzea, stakeholder komunikazioa eta hobekuntza neurgarriak firmware eta segurtasun-programa konplexuetan." }
+    ],
     currentWork: "Egungo fokua",
     researchWork: "Ikerketa-ibilbidea",
     researchIntro: "Argitalpenak, doktorego-tesia eta IoT eta sistema txertatuetarako argi ikusgai bidezko komunikazioaren ikerketa.",
+    workIntro: "Hautatutako lana arazoaren, rolaren eta lortutako eragin motaren inguruan aurkezten da.",
+    caseRole: "Rola",
+    caseRoleText: "Estrategia, arkitektura, ingeniaritza-lidergoa edo ikerketatik prototiporako entrega, proiektuaren arabera.",
+    caseImpact: "Eragina",
+    caseImpactText: "Arriskuaren murrizketa, entrega argiagoa, segurtasun-jarrera sendoagoa edo oinarri tekniko berrerabilgarriak.",
+    thesisLabel: "Doktorego-tesia",
+    thesisIntro: "IoTerako eta bere aplikazioetarako argi ikusgai bidezko komunikazio-sareei buruzko doktorego-ikerketa.",
+    researchFocusTitle: "Ikerketa-fokua",
+    researchFocusText: "Argi ikusgai bidezko komunikazioa, IoT sareak, prototipo txertatuak eta sistema seguruen ingeniaritza.",
     recognition: "Aitorpena",
     finalTitle: "Sistema industrial seguruak eraikitzea ebidentziarekin, argitasunarekin eta entrega-diziplinarekin.",
     finalText: "Lankidetzetarako, aholkularitzarako edo zibersegurtasun industrialeko programetarako, jarri harremanetan.",
@@ -155,6 +206,7 @@ const headings = {
 const leadProject = content.projects[0];
 const leadPublication = content.publications[0];
 const leadAward = content.awards[0];
+const thesis = content.publications.find((item) => item.id.includes("thesis"));
 const pageTitles: Record<PageKind, string> = {
   home: profile.title,
   experience: copy.experience,
@@ -164,6 +216,14 @@ const pageTitles: Record<PageKind, string> = {
   contact: copy.contact
 };
 const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTitles[page]} | ${profile.title}`;
+const pageDescriptions: Record<PageKind, string> = {
+  home: profile.summary,
+  experience: copy.availability,
+  work: copy.workIntro,
+  research: copy.researchIntro,
+  recognition: headings.awards,
+  contact: copy.contactLead
+};
 ---
 
 <BaseLayout title={title} description={profile.summary} locale={locale} page={page}>
@@ -205,6 +265,22 @@ const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTit
               <article class="metric">
                 <strong>{stat.value}</strong>
                 <span>{stat.label}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="section service-section">
+          <div class="section-heading centered">
+            <p class="eyebrow">{copy.serviceEyebrow}</p>
+            <h2>{copy.serviceTitle}</h2>
+            <p>{copy.serviceIntro}</p>
+          </div>
+          <div class="service-grid">
+            {copy.services.map((service) => (
+              <article class="service-card">
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
               </article>
             ))}
           </div>
@@ -291,11 +367,11 @@ const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTit
     )}
 
     {page !== "home" && (
-      <section class="page-hero">
+      <section class:list={["page-hero", `page-${page}`]}>
         <div>
           <p class="eyebrow">{profile.title}</p>
           <h1>{pageTitles[page]}</h1>
-          <p>{page === "contact" ? copy.contactLead : profile.summary}</p>
+          <p>{pageDescriptions[page]}</p>
         </div>
       </section>
     )}
@@ -370,16 +446,29 @@ const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTit
         <div class="section-heading">
           <p class="eyebrow">{copy.work}</p>
           <h2>{headings.work}</h2>
+          <p>{copy.workIntro}</p>
         </div>
-        <div class="cards">
+        <div class="case-study-grid">
           {content.projects.map(async (item) => {
             const { Content } = await item.render();
             return (
-              <article class:list={["card", { "feature-card": item.id === leadProject?.id }]}>
-                <p class="dates">{item.data.year}</p>
-                <h3>{item.data.title}</h3>
-                <div class="rich"><Content /></div>
-                {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+              <article class:list={["case-card", { "feature-card": item.id === leadProject?.id }]}>
+                <div>
+                  <p class="dates">{item.data.year}</p>
+                  <h3>{item.data.title}</h3>
+                  <div class="rich"><Content /></div>
+                  {item.data.url && <a href={withBase(item.data.url)}>{copy.open}</a>}
+                </div>
+                <dl>
+                  <div>
+                    <dt>{copy.caseRole}</dt>
+                    <dd>{copy.caseRoleText}</dd>
+                  </div>
+                  <div>
+                    <dt>{copy.caseImpact}</dt>
+                    <dd>{copy.caseImpactText}</dd>
+                  </div>
+                </dl>
               </article>
             );
           })}
@@ -388,11 +477,12 @@ const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTit
     )}
 
     {page === "research" && (
-      <section class="section latest-section">
+      <section class="section research-section">
         <div>
           <div class="section-heading compact">
             <p class="eyebrow">{copy.publications}</p>
             <h2>{headings.publications}</h2>
+            <p>{copy.researchIntro}</p>
           </div>
           <div class="latest-list">
             {content.publications.map(async (item) => {
@@ -408,7 +498,19 @@ const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTit
             })}
           </div>
         </div>
-        <div>
+        <aside class="research-aside">
+          {thesis && (
+            <article class="thesis-card feature-card">
+              <p class="eyebrow">{copy.thesisLabel}</p>
+              <h3>{thesis.data.title}</h3>
+              <p>{copy.thesisIntro}</p>
+              {thesis.data.url && <a href={withBase(thesis.data.url)}>{copy.open}</a>}
+            </article>
+          )}
+          <article class="service-card">
+            <p class="eyebrow">{copy.researchFocusTitle}</p>
+            <p>{copy.researchFocusText}</p>
+          </article>
           <div class="section-heading compact">
             <p class="eyebrow">{copy.skills}</p>
             <h2>{copy.researchWork}</h2>
@@ -421,7 +523,7 @@ const title = page === "home" ? `${profile.title} | CV & Portfolio` : `${pageTit
               </article>
             ))}
           </div>
-        </div>
+        </aside>
       </section>
     )}
 

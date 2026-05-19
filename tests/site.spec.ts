@@ -32,7 +32,7 @@ test("uses separate pages for major sections and preserves language context", as
 
   await page.goto("/en/research/");
   await expect(page.getByRole("heading", { name: "Publications" }).first()).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Visible Light Communication Networks for IoT and its Applications" })).toBeVisible();
+  await expect(page.getByRole("article").filter({ hasText: "2020 PhD" }).getByRole("heading", { name: "Visible Light Communication Networks for IoT and its Applications" })).toBeVisible();
 });
 
 test("has no public phone number and exposes downloadable CV", async ({ page }) => {
