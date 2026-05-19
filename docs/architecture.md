@@ -19,8 +19,9 @@ This repository is the source of truth for Ander Galisteo's CV and portfolio web
 ## Deployment
 
 The `Deploy website` workflow validates content, builds Astro, uploads `dist`, and deploys with GitHub Pages as the account user site at `https://andergalisteo.github.io/`.
-The site also declares `andergalisteo.com` as its custom domain through `public/CNAME`, which Astro copies into the generated `dist` folder on every build.
-DNS for the apex domain must point to GitHub Pages; the GitHub-hosted URL remains available at `https://andergalisteo.github.io/`.
+
+Custom-domain DNS is prepared for `andergalisteo.com`, but the site currently publishes without `public/CNAME` so the GitHub-hosted URL remains the canonical URL.
+To re-enable the custom domain, restore `public/CNAME` with `andergalisteo.com`, set the Pages custom domain in GitHub, and wait for GitHub to issue the HTTPS certificate.
 
 Required DNS records:
 
