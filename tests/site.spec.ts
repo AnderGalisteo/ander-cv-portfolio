@@ -35,6 +35,16 @@ test("uses separate pages for major sections and preserves language context", as
   await expect(page.getByRole("article").filter({ hasText: "2020 PhD" }).getByRole("heading", { name: "Visible Light Communication Networks for IoT and its Applications" })).toBeVisible();
 });
 
+test("surfaces current quantum security and PQC work", async ({ page }) => {
+  await page.goto("/en/");
+  await expect(page.getByText("Quantum security and PQC").first()).toBeVisible();
+  await expect(page.getByText("where, how, and when to adopt post-quantum cryptography")).toBeVisible();
+
+  await page.goto("/en/work/");
+  await expect(page.getByRole("heading", { name: "Post-quantum cryptography transition framework" })).toBeVisible();
+  await expect(page.getByText("where post-quantum cryptography should be added")).toBeVisible();
+});
+
 test("has no public phone number and exposes downloadable CV", async ({ page }) => {
   await page.goto("/en/contact/");
   await expect(page.getByText("+34")).toHaveCount(0);
