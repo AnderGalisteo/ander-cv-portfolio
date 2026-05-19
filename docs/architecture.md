@@ -20,8 +20,9 @@ This repository is the source of truth for Ander Galisteo's CV and portfolio web
 
 The `Deploy website` workflow validates content, builds Astro, uploads `dist`, and deploys with GitHub Pages as the account user site at `https://andergalisteo.github.io/`.
 
-Custom-domain DNS is prepared for `andergalisteo.com`, but the site currently publishes without `public/CNAME` so the GitHub-hosted URL remains the canonical URL.
-To re-enable the custom domain, restore `public/CNAME` with `andergalisteo.com`, set the Pages custom domain in GitHub, and wait for GitHub to issue the HTTPS certificate.
+Custom-domain DNS is prepared for `andergalisteo.com`, and the site publishes `public/CNAME` with `www.andergalisteo.com` as the GitHub Pages custom domain.
+GitHub Pages keeps the GitHub-hosted URL available as an entry point, but redirects it to the configured custom domain.
+If the custom domain needs to be disabled temporarily, remove `public/CNAME` and clear the Pages custom domain in GitHub.
 
 Required DNS records:
 
