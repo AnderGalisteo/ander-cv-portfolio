@@ -3,7 +3,7 @@ kind: experience
 title: Zibersegurtasun industrialeko zuzendaria
 company: Cybertix
 location: Donostia, Euskal Herria
-start: Urt 2023
+start: Ira 2024
 end: Gaur egun
 order: 90
 technologies:

@@ -3,7 +3,7 @@ kind: experience
 title: Director de Ciberseguridad Industrial
 company: Cybertix
 location: Donostia, España
-start: Ene 2023
+start: Sep 2024
 end: Actualidad
 order: 90
 technologies:
