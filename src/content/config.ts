@@ -35,7 +35,9 @@ const datedItem = z.object({
   organization: z.string().optional(),
   year: z.number().optional(),
   url: z.string().optional(),
-  order: z.number()
+  order: z.number(),
+  role: z.string().optional(),
+  impact: z.string().optional()
 });
 
 const skillGroup = z.object({
